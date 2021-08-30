@@ -1,5 +1,6 @@
 package com.crud.rest313.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ public class Role implements GrantedAuthority {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 

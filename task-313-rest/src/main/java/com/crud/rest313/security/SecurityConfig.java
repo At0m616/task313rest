@@ -46,14 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setForceEncoding(true);
         http.addFilterBefore(filter, CsrfFilter.class);
 
-        http.formLogin()
-                .loginPage("/login")
-                .failureUrl("/login-error")
-                .successHandler(loginSuccessHandler)
-                .loginProcessingUrl("/login")
-                .usernameParameter("j_username")
-                .passwordParameter("j_password")
-                .permitAll();
+//        http.formLogin()
+//                .loginPage("/login")
+//                .failureUrl("/login-error")
+//                .successHandler(loginSuccessHandler)
+//                .loginProcessingUrl("/login")
+//                .usernameParameter("j_username")
+//                .passwordParameter("j_password")
+//                .permitAll();
 
         http.logout()
                 .permitAll()
@@ -64,8 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/registration", "/login", "/").permitAll()
-                .antMatchers("/user/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/user/**", "/admin/**", "/api/**").permitAll()
+//                .antMatchers("/user/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest()
                 .authenticated();
 

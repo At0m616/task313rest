@@ -50,7 +50,7 @@ public class UsersController {
             return "registration";
         }
 
-        userService.saveUser(userForm, rolesId);
+        userService.saveUser(userForm);
         return "redirect:/admin";
     }
 

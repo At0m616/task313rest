@@ -1,5 +1,6 @@
 package com.crud.rest313.model;
 
+import com.crud.rest313.dto.UserSimpleDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,13 +38,21 @@ public class User implements UserDetails {
     @NotBlank(message = "password not empty")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "boot_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
+    }
+
+    public User(UserSimpleDto dto) {
+        this.firstname = dto.getFirstname();
+        this.lastname = dto.getLastname();
+        this.age = dto.getAge();
+        this.username = dto.getUsername();
+        this.password = dto.getPassword();
     }
 
     public User(Long id, String firstname,

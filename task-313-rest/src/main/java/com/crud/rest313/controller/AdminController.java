@@ -50,7 +50,7 @@ public class AdminController {
         if (bindingResult.hasErrors()) {
             return "admin-page";
         }
-        userService.saveUser(userForm, rolesId);
+        userService.saveUser(userForm);
 
         return "redirect:/admin";
     }
@@ -59,7 +59,7 @@ public class AdminController {
     @PatchMapping("/{userId}")
     public String updateUser(@PathVariable("userId") Long id, @ModelAttribute("user") User user,
                              @RequestParam(required = false, name = "roles") Long[] roles) {
-        userService.updateUser(user, roles);
+        userService.updateUser(user);
 
         return "redirect:/admin";
     }

@@ -95,7 +95,7 @@
                         <tr>
                             <td>
                                 <!-- Начало таблицы all users-->
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" id="main-tab">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -403,14 +403,7 @@
     </div>
 
 </div>
-<script>
-    $(document).ready(function() {
-        $('li').click(function() {
-            $('li.list-group-item.active').removeClass("active");
-            $(this).addClass("active");
-        });
-    });
-</script>
+<script src="../static/adminPage.js"></script>
 
 <script>
     $(document).ready(function(){

@@ -31,17 +31,15 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(User user, Long[] roles) {
+    public void saveUser(User user) {
 
         if ((roleService.findById(1L) == null)
                 || (roleService.findById(2L) == null)) {
             roleService.save(new Role(1L, "ROLE_ADMIN"));
             roleService.save(new Role(2L, "ROLE_USER"));
         }
-        Set<Role> roleSet = roleService.findRolesSetById(roles);
 
         if (userDao.findUserByUsername(user.getUsername()) == null) {
-            user.setRoles(roleSet);
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userDao.save(user);
         } else {
@@ -56,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateUser(User user, Long[] roles) {
+    public void updateUser(User user) {
         if (user.getId() == null) {
             try {
                 throw new Exception("User not exist");
@@ -66,8 +64,6 @@ public class UserServiceImpl implements UserService {
         }
         var userFindDB = findUserById(user.getId());
 
-        Set<Role> roleSet = roleService.findRolesSetById(roles);
-        userFindDB.setRoles(roleSet);
         userFindDB.setFirstname(user.getFirstname());
         userFindDB.setLastname(user.getLastname());
         userFindDB.setAge(user.getAge());
